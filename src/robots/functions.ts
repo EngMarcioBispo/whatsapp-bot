@@ -18,15 +18,15 @@ function toTitleCase(str:string) {
 
 const sendMessage = async (number:string, message:string, wmaid?:string) => {
     if (wmaid) {
-        axios.post(`https://graph.facebook.com/v14.0/${process.env.WAID}/messages`, {
+        axios.post(`https://graph.facebook.com/v17.0/${process.env.WAID}/messages`, {
             messaging_product: 'whatsapp',
             context: {
                 message_id: wmaid
             },
             to: number,
             type: "text",
-            text: { 
-                "body": message, 
+            text: {
+                "body": message,
             }
         }, axiosConfig)
 
@@ -37,12 +37,12 @@ const sendMessage = async (number:string, message:string, wmaid?:string) => {
             console.log(error);
         });
     } else {
-        axios.post(`https://graph.facebook.com/v14.0/${process.env.WAID}/messages`, {
+        axios.post(`https://graph.facebook.com/v17.0/${process.env.WAID}/messages`, {
             messaging_product: 'whatsapp',
             to: number,
             type: "text",
-            text: { 
-                "body": message, 
+            text: {
+                "body": message,
             }
         }, axiosConfig)
 
@@ -68,7 +68,7 @@ const sendTranslatedMessage = async (number:string, message:string, wmaid:string
 }
 
 const sendNewsCategory = async (number:string, wmaid:string) => {
-    axios.post(`https://graph.facebook.com/v14.0/${process.env.WAID}/messages`, {
+    axios.post(`https://graph.facebook.com/v17.0/${process.env.WAID}/messages`, {
         messaging_product: 'whatsapp',
         context: {
             message_id: wmaid
@@ -93,25 +93,25 @@ const sendNewsCategory = async (number:string, wmaid:string) => {
                         type: "reply",
                         reply: {
                             id: "news.mostread",
-                            title: "Mais lidas" 
+                            title: "Mais lidas"
                         }
                     },
                     {
                         type: "reply",
                         reply: {
                             id: "news.random",
-                            title: "Aleatórias" 
+                            title: "Aleatórias"
                         }
                     },
                     {
                         type: "reply",
                         reply: {
                             id: "news.latest",
-                            title: "Última notícia" 
+                            title: "Última notícia"
                         }
                     }
                 ]
-            }  
+            }
         }
     }, axiosConfig)
 
@@ -143,7 +143,7 @@ const sendNew = async (link:string, destination:string, wmaid:string) => {
 const sendNewsList = async (number:string, wmaid:string, posts:any) => {
     const sections = posts.map((item:any) => {
         const DESCRIPTION_LIMIT = 68
-        const aboveTitleDescription = DESCRIPTION_LIMIT < item.title.length 
+        const aboveTitleDescription = DESCRIPTION_LIMIT < item.title.length
         const dotsOrEmpyDescription = aboveTitleDescription ? "..." : ""
 
         return {
@@ -158,7 +158,7 @@ const sendNewsList = async (number:string, wmaid:string, posts:any) => {
         }
     })
 
-    axios.post(`https://graph.facebook.com/v14.0/${process.env.WAID}/messages`, {
+    axios.post(`https://graph.facebook.com/v17.0/${process.env.WAID}/messages`, {
         messaging_product: 'whatsapp',
         context: {
             message_id: wmaid
@@ -202,15 +202,15 @@ const getNew = async (link:string) => {
 }
 
 const sendAudio = async (number:string, link:string, wmaid:string) => {
-    axios.post(`https://graph.facebook.com/v14.0/${process.env.WAID}/messages`, {
+    axios.post(`https://graph.facebook.com/v17.0/${process.env.WAID}/messages`, {
         messaging_product: 'whatsapp',
         context: {
             message_id: wmaid
         },
         to: number,
         type: "audio",
-        audio: { 
-            link: link, 
+        audio: {
+            link: link,
         }
     }, axiosConfig)
 
@@ -223,16 +223,16 @@ const sendAudio = async (number:string, link:string, wmaid:string) => {
 }
 
 const sendImage = async (number:string, link:string, caption:string, wmaid:string) => {
-    axios.post(`https://graph.facebook.com/v14.0/${process.env.WAID}/messages`, {
+    axios.post(`https://graph.facebook.com/v17.0/${process.env.WAID}/messages`, {
         messaging_product: 'whatsapp',
         context: {
             message_id: wmaid
         },
         to: number,
         type: "image",
-        image: { 
+        image: {
             link: link,
-            caption: caption 
+            caption: caption
         }
     }, axiosConfig)
 
@@ -245,7 +245,7 @@ const sendImage = async (number:string, link:string, caption:string, wmaid:strin
 }
 
 const sendDevContact = async (number:string, wmaid:string) => {
-    axios.post(`https://graph.facebook.com/v14.0/${process.env.WAID}/messages`, {
+    axios.post(`https://graph.facebook.com/v17.0/${process.env.WAID}/messages`, {
         messaging_product: 'whatsapp',
         context: {
             message_id: wmaid
