@@ -3,16 +3,16 @@ import bodyParser from "body-parser"
 import axios from 'axios'
 import YTSeacher from "./robots/YTSearch"
 import chatBot from './robots/chatBot'
-import { 
-  getWeatherByCityName, 
-  getWeatherByCords 
+import {
+  getWeatherByCityName,
+  getWeatherByCords
 } from './robots/getWeather'
-import { 
-  removeCommand, 
-  sendMessage, 
-  sendImage, 
-  toTitleCase, 
-  sendAudio, 
+import {
+  removeCommand,
+  sendMessage,
+  sendImage,
+  toTitleCase,
+  sendAudio,
   getNewsByCategory,
   sendNew,
   sendNewsList,
@@ -20,14 +20,14 @@ import {
 } from './robots/functions'
 
 const app = express()
-const PORT = process.env.PORT || 3333 
+const PORT = process.env.PORT || 5000
 
 const searcher = new YTSeacher();
 
 app.use(bodyParser.json())
 /*app.post("/hook", async (req:any, res:any) => {
     const { value } = req?.body?.entry[0]?.changes[0]
-    
+
     if (value?.messages) {
         console.log(value?.messages)
         const { id, from: destination } = value?.messages[0]
@@ -36,7 +36,7 @@ app.use(bodyParser.json())
         const interactive = value?.messages[0].interactive
 
         if (message) {
-            if (message.toLowerCase().includes("#temperatura")) {                
+            if (message.toLowerCase().includes("#temperatura")) {
                 try {
                     const params = removeCommand("#temperatura", message)
 
@@ -73,14 +73,14 @@ app.use(bodyParser.json())
                     })
                     .catch(err => {
                         sendMessage(destination, `No results found.`, id)
-                    }) 
+                    })
                 } catch (err) {
                     sendMessage(destination, `No results found.`, id)
                 }
             } else if (message.toLowerCase().includes("+en")) {
                 try {
                     const params = removeCommand("+en", message)
-                    sendTranslatedMessage(destination, params, id, "en") 
+                    sendTranslatedMessage(destination, params, id, "en")
                 } catch (err) {
                     sendMessage(destination, `No results found.`, id)
                 }
@@ -110,7 +110,7 @@ app.use(bodyParser.json())
             } else if (message.toLowerCase().includes("+pt")) {
                 try {
                     const params = removeCommand("+pt", message)
-                    sendTranslatedMessage(destination, params, id, "pt") 
+                    sendTranslatedMessage(destination, params, id, "pt")
                 } catch (err) {
                     sendMessage(destination, `No results found.`, id)
                 }
@@ -129,7 +129,7 @@ app.use(bodyParser.json())
                         await sendAudio(destination, res.data.file, id)
                     }).catch(err => {
                         sendMessage(destination, `Indisponviel..`, id)
-                    }) 
+                    })
                 } catch (err) {
                     sendMessage(destination, `Não encontrado`, id)
                 }
@@ -194,7 +194,7 @@ app.use(bodyParser.json())
                     default:
                         console.log(buttonReply.id)
                 }
-            } 
+            }
 
             if (listReply) {
                 sendNew(listReply.id, destination, id)
